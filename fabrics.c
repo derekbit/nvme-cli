@@ -757,11 +757,14 @@ int nvmf_discover(const char *desc, int argc, char **argv, bool connect)
 		hostnqn = hnqn = nvmf_hostnqn_generate();
 	if (!hostid)
 		hostid = hid = nvmf_hostid_from_file();
+
+	printf("Debug --> A hostnqn: %s, hostid: %s\n", hostnqn, hostid);
 	h = nvme_lookup_host(r, hostnqn, hostid);
 	if (!h) {
 		ret = ENOMEM;
 		goto out_free;
 	}
+	printf("Debug --> B hostnqn: %s, hostid: %s\n", hostnqn, hostid);
 	if (device) {
 		if (!strcmp(device, "none"))
 			device = NULL;
